@@ -122,8 +122,6 @@ class CakeS3Component extends Component
      */
     public function putObject($filePathToUpload, $locationOnS3, $permission = self::ACL_PUBLIC_READ, $mimeType = null)
     {
-
-        try {
             S3::putObject(S3::inputFile($filePathToUpload), $this->bucket, $locationOnS3, $permission, array(), $mimeType);
             $info = $this->getObjectInfo($locationOnS3);
             return array(
@@ -131,9 +129,6 @@ class CakeS3Component extends Component
                     'url' => $this->buildUrlToFile($locationOnS3),
                     'size' => $info['size']
             );
-        } catch (Exception $e) {
-            return false;
-        }
     }
     
     /**
